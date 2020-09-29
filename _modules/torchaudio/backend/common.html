@@ -193,6 +193,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../sox_effects.html">torchaudio.sox_effects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../compliance.kaldi.html">torchaudio.compliance.kaldi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../kaldi_io.html">torchaudio.kaldi_io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils.html">torchaudio.utils</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PyTorch Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/docs">PyTorch</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/audio">torchaudio</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/vision">torchvision</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/elastic/">TorchElastic</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/serve">TorchServe</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
 
             
@@ -266,23 +277,11 @@
              <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               
   <h1>Source code for torchaudio.backend.common</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
 
 
 <div class="viewcode-block" id="SignalInfo"><a class="viewcode-back" href="../../../backend.html#torchaudio.backend.common.SignalInfo">[docs]</a><span class="k">class</span> <span class="nc">SignalInfo</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Data class returned ``info`` functions.</span>
-
-<span class="sd">    Used by :ref:`sox backend&lt;sox_backend&gt;` and :ref:`soundfile backend&lt;soundfile_backend&gt;`</span>
-
-<span class="sd">    See https://fossies.org/dox/sox-14.4.2/structsox__signalinfo__t.html</span>
-
-<span class="sd">    :ivar Optional[int] channels: The number of channels</span>
-<span class="sd">    :ivar Optional[float] rate: Sampleing rate</span>
-<span class="sd">    :ivar Optional[int] precision: Bit depth</span>
-<span class="sd">    :ivar Optional[int] length: For :ref:`sox backend&lt;sox_backend&gt;`, the number of samples.</span>
-<span class="sd">        (frames * channels). For :ref:`soundfile backend&lt;soundfile_backend&gt;`, the number of frames.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">channels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">rate</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">precision</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -294,21 +293,7 @@
 
 
 <div class="viewcode-block" id="EncodingInfo"><a class="viewcode-back" href="../../../backend.html#torchaudio.backend.common.EncodingInfo">[docs]</a><span class="k">class</span> <span class="nc">EncodingInfo</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Data class returned ``info`` functions.</span>
-
-<span class="sd">    Used by :ref:`sox backend&lt;sox_backend&gt;` and :ref:`soundfile backend&lt;soundfile_backend&gt;`</span>
-
-<span class="sd">    See https://fossies.org/dox/sox-14.4.2/structsox__encodinginfo__t.html</span>
-
-<span class="sd">    :ivar Optional[int] encoding: sox_encoding_t</span>
-<span class="sd">    :ivar Optional[int] bits_per_sample: bit depth</span>
-<span class="sd">    :ivar Optional[float] compression: Compression option</span>
-<span class="sd">    :ivar Any reverse_bytes:</span>
-<span class="sd">    :ivar Any reverse_nibbles:</span>
-<span class="sd">    :ivar Any reverse_bits:</span>
-<span class="sd">    :ivar Optional[bool] opposite_endian:</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">encoding</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">bits_per_sample</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">compression</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -482,14 +467,23 @@
   
 
      
-       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-         <script src="../../../_static/jquery.js"></script>
-         <script src="../../../_static/underscore.js"></script>
-         <script src="../../../_static/doctools.js"></script>
-         <script src="../../../_static/language_data.js"></script>
-         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
-         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
-         <script src="../../../_static/katex_autorenderer.js"></script>
+       <script type="text/javascript">
+           var DOCUMENTATION_OPTIONS = {
+               URL_ROOT:'../../../',
+               VERSION:'master',
+               LANGUAGE:'None',
+               COLLAPSE_INDEX:false,
+               FILE_SUFFIX:'.html',
+               HAS_SOURCE:  true,
+               SOURCELINK_SUFFIX: '.txt'
+           };
+       </script>
+         <script type="text/javascript" src="../../../_static/jquery.js"></script>
+         <script type="text/javascript" src="../../../_static/underscore.js"></script>
+         <script type="text/javascript" src="../../../_static/doctools.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script type="text/javascript" src="../../../_static/katex_autorenderer.js"></script>
      
 
   

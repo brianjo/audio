@@ -195,6 +195,17 @@
 <li class="toctree-l1"><a class="reference internal" href="sox_effects.html">torchaudio.sox_effects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compliance.kaldi.html">torchaudio.compliance.kaldi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kaldi_io.html">torchaudio.kaldi_io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">torchaudio.utils</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PyTorch Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/docs">PyTorch</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/audio">torchaudio</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/vision">torchvision</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/elastic/">TorchElastic</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/serve">TorchServe</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
 
             
@@ -269,12 +280,12 @@
               
   <div class="section" id="torchaudio-datasets">
 <h1>torchaudio.datasets<a class="headerlink" href="#torchaudio-datasets" title="Permalink to this headline">¶</a></h1>
-<p>All datasets are subclasses of <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code>
-i.e, they have <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> and <code class="docutils literal notranslate"><span class="pre">__len__</span></code> methods implemented.
-Hence, they can all be passed to a <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.DataLoader</span></code>
-which can load multiple samples parallelly using <code class="docutils literal notranslate"><span class="pre">torch.multiprocessing</span></code> workers.
+<p>All datasets are subclasses of <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal"><span class="pre">torch.utils.data.Dataset</span></code></a>
+i.e, they have <code class="docutils literal"><span class="pre">__getitem__</span></code> and <code class="docutils literal"><span class="pre">__len__</span></code> methods implemented.
+Hence, they can all be passed to a <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal"><span class="pre">torch.utils.data.DataLoader</span></code></a>
+which can load multiple samples parallelly using <code class="docutils literal"><span class="pre">torch.multiprocessing</span></code> workers.
 For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yesno_data</span> <span class="o">=</span> <span class="n">torchaudio</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">YESNO</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">yesno_data</span> <span class="o">=</span> <span class="n">torchaudio</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">YESNO</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">data_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">yesno_data</span><span class="p">,</span>
                                           <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                                           <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -283,25 +294,28 @@ For example:</p>
 </div>
 <p>The following datasets are available:</p>
 <div class="contents local topic" id="datasets">
-<p class="topic-title">Datasets</p>
+<p class="topic-title first">Datasets</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#cmuarctic" id="id1">CMUARCTIC</a></p></li>
-<li><p><a class="reference internal" href="#commonvoice" id="id2">COMMONVOICE</a></p></li>
-<li><p><a class="reference internal" href="#gtzan" id="id3">GTZAN</a></p></li>
-<li><p><a class="reference internal" href="#librispeech" id="id4">LIBRISPEECH</a></p></li>
-<li><p><a class="reference internal" href="#ljspeech" id="id5">LJSPEECH</a></p></li>
-<li><p><a class="reference internal" href="#speechcommands" id="id6">SPEECHCOMMANDS</a></p></li>
-<li><p><a class="reference internal" href="#vctk" id="id7">VCTK</a></p></li>
-<li><p><a class="reference internal" href="#yesno" id="id8">YESNO</a></p></li>
+<li><a class="reference internal" href="#cmuarctic" id="id1">CMUARCTIC</a></li>
+<li><a class="reference internal" href="#commonvoice" id="id2">COMMONVOICE</a></li>
+<li><a class="reference internal" href="#gtzan" id="id3">GTZAN</a></li>
+<li><a class="reference internal" href="#librispeech" id="id4">LIBRISPEECH</a></li>
+<li><a class="reference internal" href="#libritts" id="id5">LIBRITTS</a></li>
+<li><a class="reference internal" href="#ljspeech" id="id6">LJSPEECH</a></li>
+<li><a class="reference internal" href="#speechcommands" id="id7">SPEECHCOMMANDS</a></li>
+<li><a class="reference internal" href="#tedlium" id="id8">TEDLIUM</a></li>
+<li><a class="reference internal" href="#vctk" id="id9">VCTK</a></li>
+<li><a class="reference internal" href="#vctk-092" id="id10">VCTK_092</a></li>
+<li><a class="reference internal" href="#yesno" id="id11">YESNO</a></li>
 </ul>
 </div>
 <p>All the datasets have almost similar API. They all have two common arguments:
-<code class="docutils literal notranslate"><span class="pre">transform</span></code> and  <code class="docutils literal notranslate"><span class="pre">target_transform</span></code> to transform the input and target respectively.</p>
+<code class="docutils literal"><span class="pre">transform</span></code> and  <code class="docutils literal"><span class="pre">target_transform</span></code> to transform the input and target respectively.</p>
 <div class="section" id="cmuarctic">
 <h2><a class="toc-backref" href="#id1">CMUARCTIC</a><a class="headerlink" href="#cmuarctic" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
+<dl class="class">
 <dt id="torchaudio.datasets.CMUARCTIC">
-<em class="property">class </em><code class="sig-prename descclassname">torchaudio.datasets.</code><code class="sig-name descname">CMUARCTIC</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">url</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'aew'</span></em>, <em class="sig-param"><span class="n">folder_in_archive</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'ARCTIC'</span></em>, <em class="sig-param"><span class="n">download</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torchaudio/datasets/cmuarctic.html#CMUARCTIC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.CMUARCTIC" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">torchaudio.datasets.</code><code class="descname">CMUARCTIC</code><span class="sig-paren">(</span><em>root: str</em>, <em>url: str = 'aew'</em>, <em>folder_in_archive: str = 'ARCTIC'</em>, <em>download: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/torchaudio/datasets/cmuarctic.html#CMUARCTIC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.CMUARCTIC" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Dataset for CMU_arctic. Each item is a tuple of the form:
 waveform, sample_rate, utterance, utterance_id</p>
 </dd></dl>
@@ -309,9 +323,9 @@ waveform, sample_rate, utterance, utterance_id</p>
 </div>
 <div class="section" id="commonvoice">
 <h2><a class="toc-backref" href="#id2">COMMONVOICE</a><a class="headerlink" href="#commonvoice" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
+<dl class="class">
 <dt id="torchaudio.datasets.COMMONVOICE">
-<em class="property">class </em><code class="sig-prename descclassname">torchaudio.datasets.</code><code class="sig-name descname">COMMONVOICE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">tsv</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'train.tsv'</span></em>, <em class="sig-param"><span class="n">url</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'english'</span></em>, <em class="sig-param"><span class="n">folder_in_archive</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'CommonVoice'</span></em>, <em class="sig-param"><span class="n">version</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'cv-corpus-4-2019-12-10'</span></em>, <em class="sig-param"><span class="n">download</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torchaudio/datasets/commonvoice.html#COMMONVOICE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.COMMONVOICE" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">torchaudio.datasets.</code><code class="descname">COMMONVOICE</code><span class="sig-paren">(</span><em>root: str</em>, <em>tsv: str = 'train.tsv'</em>, <em>url: str = 'english'</em>, <em>folder_in_archive: str = 'CommonVoice'</em>, <em>version: str = 'cv-corpus-4-2019-12-10'</em>, <em>download: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/torchaudio/datasets/commonvoice.html#COMMONVOICE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.COMMONVOICE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Dataset for CommonVoice. Each item is a tuple of the form:
 (waveform, sample_rate, dictionary)
 where dictionary is a dictionary built from the tsv file with the following keys:
@@ -321,9 +335,9 @@ client_id, path, sentence, up_votes, down_votes, age, gender, accent.</p>
 </div>
 <div class="section" id="gtzan">
 <h2><a class="toc-backref" href="#id3">GTZAN</a><a class="headerlink" href="#gtzan" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
+<dl class="class">
 <dt id="torchaudio.datasets.GTZAN">
-<em class="property">class </em><code class="sig-prename descclassname">torchaudio.datasets.</code><code class="sig-name descname">GTZAN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">url</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'http://opihi.cs.uvic.ca/sound/genres.tar.gz'</span></em>, <em class="sig-param"><span class="n">folder_in_archive</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'genres'</span></em>, <em class="sig-param"><span class="n">download</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">subset</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torchaudio/datasets/gtzan.html#GTZAN"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.GTZAN" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">torchaudio.datasets.</code><code class="descname">GTZAN</code><span class="sig-paren">(</span><em>root: str</em>, <em>url: str = 'http://opihi.cs.uvic.ca/sound/genres.tar.gz'</em>, <em>folder_in_archive: str = 'genres'</em>, <em>download: bool = False</em>, <em>subset: typing.Any = None</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/torchaudio/datasets/gtzan.html#GTZAN"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.GTZAN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Dataset for GTZAN. Each item is a tuple of the form:
 waveform, sample_rate, label.</p>
 <p>Please see <a class="reference external" href="http://marsyas.info/downloads/datasets.html">http://marsyas.info/downloads/datasets.html</a>
@@ -333,39 +347,45 @@ if you are planning to use this dataset to publish results.</p>
 </div>
 <div class="section" id="librispeech">
 <h2><a class="toc-backref" href="#id4">LIBRISPEECH</a><a class="headerlink" href="#librispeech" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
+<dl class="class">
 <dt id="torchaudio.datasets.LIBRISPEECH">
-<em class="property">class </em><code class="sig-prename descclassname">torchaudio.datasets.</code><code class="sig-name descname">LIBRISPEECH</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">url</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'train-clean-100'</span></em>, <em class="sig-param"><span class="n">folder_in_archive</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'LibriSpeech'</span></em>, <em class="sig-param"><span class="n">download</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torchaudio/datasets/librispeech.html#LIBRISPEECH"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.LIBRISPEECH" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">torchaudio.datasets.</code><code class="descname">LIBRISPEECH</code><span class="sig-paren">(</span><em>root: str</em>, <em>url: str = 'train-clean-100'</em>, <em>folder_in_archive: str = 'LibriSpeech'</em>, <em>download: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/torchaudio/datasets/librispeech.html#LIBRISPEECH"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.LIBRISPEECH" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Dataset for LibriSpeech. Each item is a tuple of the form:
 waveform, sample_rate, utterance, speaker_id, chapter_id, utterance_id</p>
 </dd></dl>
 
 </div>
+<div class="section" id="libritts">
+<h2><a class="toc-backref" href="#id5">LIBRITTS</a><a class="headerlink" href="#libritts" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="ljspeech">
-<h2><a class="toc-backref" href="#id5">LJSPEECH</a><a class="headerlink" href="#ljspeech" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
+<h2><a class="toc-backref" href="#id6">LJSPEECH</a><a class="headerlink" href="#ljspeech" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
 <dt id="torchaudio.datasets.LJSPEECH">
-<em class="property">class </em><code class="sig-prename descclassname">torchaudio.datasets.</code><code class="sig-name descname">LJSPEECH</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">url</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'https://data.keithito.com/data/speech/LJSpeech-1.1.tar.bz2'</span></em>, <em class="sig-param"><span class="n">folder_in_archive</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'wavs'</span></em>, <em class="sig-param"><span class="n">download</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torchaudio/datasets/ljspeech.html#LJSPEECH"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.LJSPEECH" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">torchaudio.datasets.</code><code class="descname">LJSPEECH</code><span class="sig-paren">(</span><em>root: str</em>, <em>url: str = 'https://data.keithito.com/data/speech/LJSpeech-1.1.tar.bz2'</em>, <em>folder_in_archive: str = 'wavs'</em>, <em>download: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/torchaudio/datasets/ljspeech.html#LJSPEECH"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.LJSPEECH" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Dataset for LJSpeech-1.1. Each item is a tuple of the form:
 waveform, sample_rate, transcript, normalized_transcript</p>
 </dd></dl>
 
 </div>
 <div class="section" id="speechcommands">
-<h2><a class="toc-backref" href="#id6">SPEECHCOMMANDS</a><a class="headerlink" href="#speechcommands" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
+<h2><a class="toc-backref" href="#id7">SPEECHCOMMANDS</a><a class="headerlink" href="#speechcommands" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
 <dt id="torchaudio.datasets.SPEECHCOMMANDS">
-<em class="property">class </em><code class="sig-prename descclassname">torchaudio.datasets.</code><code class="sig-name descname">SPEECHCOMMANDS</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">url</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'speech_commands_v0.02'</span></em>, <em class="sig-param"><span class="n">folder_in_archive</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'SpeechCommands'</span></em>, <em class="sig-param"><span class="n">download</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torchaudio/datasets/speechcommands.html#SPEECHCOMMANDS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.SPEECHCOMMANDS" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">torchaudio.datasets.</code><code class="descname">SPEECHCOMMANDS</code><span class="sig-paren">(</span><em>root: str</em>, <em>url: str = 'speech_commands_v0.02'</em>, <em>folder_in_archive: str = 'SpeechCommands'</em>, <em>download: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/torchaudio/datasets/speechcommands.html#SPEECHCOMMANDS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.SPEECHCOMMANDS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Dataset for Speech Commands. Each item is a tuple of the form:
 waveform, sample_rate, label, speaker_id, utterance_number</p>
 </dd></dl>
 
 </div>
+<div class="section" id="tedlium">
+<h2><a class="toc-backref" href="#id8">TEDLIUM</a><a class="headerlink" href="#tedlium" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="vctk">
-<h2><a class="toc-backref" href="#id7">VCTK</a><a class="headerlink" href="#vctk" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
+<h2><a class="toc-backref" href="#id9">VCTK</a><a class="headerlink" href="#vctk" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
 <dt id="torchaudio.datasets.VCTK">
-<em class="property">class </em><code class="sig-prename descclassname">torchaudio.datasets.</code><code class="sig-name descname">VCTK</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">url</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'http://homepages.inf.ed.ac.uk/jyamagis/release/VCTK-Corpus.tar.gz'</span></em>, <em class="sig-param"><span class="n">folder_in_archive</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'VCTK-Corpus'</span></em>, <em class="sig-param"><span class="n">download</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">downsample</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">transform</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">target_transform</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torchaudio/datasets/vctk.html#VCTK"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.VCTK" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">torchaudio.datasets.</code><code class="descname">VCTK</code><span class="sig-paren">(</span><em>root: str</em>, <em>url: str = 'http://homepages.inf.ed.ac.uk/jyamagis/release/VCTK-Corpus.tar.gz'</em>, <em>folder_in_archive: str = 'VCTK-Corpus'</em>, <em>download: bool = False</em>, <em>downsample: bool = False</em>, <em>transform: typing.Any = None</em>, <em>target_transform: typing.Any = None</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/torchaudio/datasets/vctk.html#VCTK"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.VCTK" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Dataset for VCTK. Each item is a tuple of the form:
 (waveform, sample_rate, utterance, speaker_id, utterance_id)</p>
 <p>Folder <cite>p315</cite> will be ignored due to the non-existent corresponding text files.
@@ -373,11 +393,14 @@ For more information about the dataset visit: <a class="reference external" href
 </dd></dl>
 
 </div>
+<div class="section" id="vctk-092">
+<h2><a class="toc-backref" href="#id10">VCTK_092</a><a class="headerlink" href="#vctk-092" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="yesno">
-<h2><a class="toc-backref" href="#id8">YESNO</a><a class="headerlink" href="#yesno" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
+<h2><a class="toc-backref" href="#id11">YESNO</a><a class="headerlink" href="#yesno" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
 <dt id="torchaudio.datasets.YESNO">
-<em class="property">class </em><code class="sig-prename descclassname">torchaudio.datasets.</code><code class="sig-name descname">YESNO</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">url</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'http://www.openslr.org/resources/1/waves_yesno.tar.gz'</span></em>, <em class="sig-param"><span class="n">folder_in_archive</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">'waves_yesno'</span></em>, <em class="sig-param"><span class="n">download</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">transform</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">target_transform</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torchaudio/datasets/yesno.html#YESNO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.YESNO" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">torchaudio.datasets.</code><code class="descname">YESNO</code><span class="sig-paren">(</span><em>root: str</em>, <em>url: str = 'http://www.openslr.org/resources/1/waves_yesno.tar.gz'</em>, <em>folder_in_archive: str = 'waves_yesno'</em>, <em>download: bool = False</em>, <em>transform: typing.Any = None</em>, <em>target_transform: typing.Any = None</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/torchaudio/datasets/yesno.html#YESNO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchaudio.datasets.YESNO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Dataset for YesNo. Each item is a tuple of the form:
 (waveform, sample_rate, labels)</p>
 </dd></dl>
@@ -433,9 +456,12 @@ For more information about the dataset visit: <a class="reference external" href
 <li><a class="reference internal" href="#commonvoice">COMMONVOICE</a></li>
 <li><a class="reference internal" href="#gtzan">GTZAN</a></li>
 <li><a class="reference internal" href="#librispeech">LIBRISPEECH</a></li>
+<li><a class="reference internal" href="#libritts">LIBRITTS</a></li>
 <li><a class="reference internal" href="#ljspeech">LJSPEECH</a></li>
 <li><a class="reference internal" href="#speechcommands">SPEECHCOMMANDS</a></li>
+<li><a class="reference internal" href="#tedlium">TEDLIUM</a></li>
 <li><a class="reference internal" href="#vctk">VCTK</a></li>
+<li><a class="reference internal" href="#vctk-092">VCTK_092</a></li>
 <li><a class="reference internal" href="#yesno">YESNO</a></li>
 </ul>
 </li>
@@ -453,14 +479,23 @@ For more information about the dataset visit: <a class="reference external" href
   
 
      
-       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-         <script src="_static/jquery.js"></script>
-         <script src="_static/underscore.js"></script>
-         <script src="_static/doctools.js"></script>
-         <script src="_static/language_data.js"></script>
-         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
-         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
-         <script src="_static/katex_autorenderer.js"></script>
+       <script type="text/javascript">
+           var DOCUMENTATION_OPTIONS = {
+               URL_ROOT:'./',
+               VERSION:'master',
+               LANGUAGE:'None',
+               COLLAPSE_INDEX:false,
+               FILE_SUFFIX:'.html',
+               HAS_SOURCE:  true,
+               SOURCELINK_SUFFIX: '.txt'
+           };
+       </script>
+         <script type="text/javascript" src="_static/jquery.js"></script>
+         <script type="text/javascript" src="_static/underscore.js"></script>
+         <script type="text/javascript" src="_static/doctools.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script type="text/javascript" src="_static/katex_autorenderer.js"></script>
      
 
   

@@ -31,7 +31,7 @@ Structures used to exchange data between Python interface and ``libsox``. They a
 
 .. autoclass:: torchaudio.backend.common.SignalInfo
 
-.. autoclass:: torchaudio.backend.common.EncodingInfo
+.. autoclass:: torchaudio.backend.common.EncodingInfo               
 
 .. _sox_backend:
 

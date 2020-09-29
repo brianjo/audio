@@ -193,6 +193,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../sox_effects.html">torchaudio.sox_effects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../compliance.kaldi.html">torchaudio.compliance.kaldi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../kaldi_io.html">torchaudio.kaldi_io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils.html">torchaudio.utils</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PyTorch Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/docs">PyTorch</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/audio">torchaudio</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/vision">torchvision</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/elastic/">TorchElastic</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/serve">TorchServe</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
 
             
@@ -268,11 +279,11 @@
   <h1>Source code for torchaudio.backend.utils</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Defines utilities for switching audio backends&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
 
 <span class="kn">import</span> <span class="nn">torchaudio</span>
-<span class="kn">from</span> <span class="nn">torchaudio._internal.module_utils</span> <span class="kn">import</span> <span class="n">is_module_available</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">torchaudio._internal.module_utils</span> <span class="k">import</span> <span class="n">is_module_available</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">no_backend</span><span class="p">,</span>
     <span class="n">sox_backend</span><span class="p">,</span>
     <span class="n">sox_io_backend</span><span class="p">,</span>
@@ -287,11 +298,7 @@
 
 
 <div class="viewcode-block" id="list_audio_backends"><a class="viewcode-back" href="../../../torchaudio.html#torchaudio.list_audio_backends">[docs]</a><span class="k">def</span> <span class="nf">list_audio_backends</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;List available backends</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        List[str]: The list of available backends.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;List available backends&quot;&quot;&quot;</span>
     <span class="n">backends</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">is_module_available</span><span class="p">(</span><span class="s1">&#39;soundfile&#39;</span><span class="p">):</span>
         <span class="n">backends</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;soundfile&#39;</span><span class="p">)</span>
@@ -301,18 +308,17 @@
     <span class="k">return</span> <span class="n">backends</span></div>
 
 
-<div class="viewcode-block" id="set_audio_backend"><a class="viewcode-back" href="../../../torchaudio.html#torchaudio.set_audio_backend">[docs]</a><span class="k">def</span> <span class="nf">set_audio_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+<div class="viewcode-block" id="set_audio_backend"><a class="viewcode-back" href="../../../torchaudio.html#torchaudio.set_audio_backend">[docs]</a><span class="k">def</span> <span class="nf">set_audio_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Set the backend for I/O operation</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        backend (Optional[str]): Name of the backend.</span>
-<span class="sd">            One of ``&quot;sox&quot;``, ``&quot;sox_io&quot;`` or ``&quot;soundfile&quot;`` based on availability</span>
-<span class="sd">            of the system. If ``None`` is provided the  current backend is unassigned.</span>
+<span class="sd">        backend (str): Name of the backend. One of &quot;sox&quot; or &quot;soundfile&quot;,</span>
+<span class="sd">            based on availability of the system.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">backend</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">list_audio_backends</span><span class="p">():</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s1">&#39;Backend &quot;</span><span class="si">{</span><span class="n">backend</span><span class="si">}</span><span class="s1">&quot; is not one of &#39;</span>
-            <span class="sa">f</span><span class="s1">&#39;available backends: </span><span class="si">{</span><span class="n">list_audio_backends</span><span class="p">()</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+            <span class="n">f</span><span class="s1">&#39;Backend &quot;</span><span class="si">{backend}</span><span class="s1">&quot; is not one of &#39;</span>
+            <span class="n">f</span><span class="s1">&#39;available backends: {list_audio_backends()}.&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">module</span> <span class="o">=</span> <span class="n">no_backend</span>
@@ -323,7 +329,7 @@
     <span class="k">elif</span> <span class="n">backend</span> <span class="o">==</span> <span class="s1">&#39;soundfile&#39;</span><span class="p">:</span>
         <span class="n">module</span> <span class="o">=</span> <span class="n">soundfile_backend</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unexpected backend &quot;</span><span class="si">{</span><span class="n">backend</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Unexpected backend &quot;</span><span class="si">{backend}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;save&#39;</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;load_wav&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">]:</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="n">torchaudio</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">func</span><span class="p">))</span></div>
@@ -341,11 +347,7 @@
 
 
 <div class="viewcode-block" id="get_audio_backend"><a class="viewcode-back" href="../../../torchaudio.html#torchaudio.get_audio_backend">[docs]</a><span class="k">def</span> <span class="nf">get_audio_backend</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Get the name of the current backend</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Optional[str]: The name of the current backend or ``None`` if no backend is assigned.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Get the name of the current backend&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">torchaudio</span><span class="o">.</span><span class="n">load</span> <span class="o">==</span> <span class="n">no_backend</span><span class="o">.</span><span class="n">load</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="n">torchaudio</span><span class="o">.</span><span class="n">load</span> <span class="o">==</span> <span class="n">sox_backend</span><span class="o">.</span><span class="n">load</span><span class="p">:</span>
@@ -402,14 +404,23 @@
   
 
      
-       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-         <script src="../../../_static/jquery.js"></script>
-         <script src="../../../_static/underscore.js"></script>
-         <script src="../../../_static/doctools.js"></script>
-         <script src="../../../_static/language_data.js"></script>
-         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
-         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
-         <script src="../../../_static/katex_autorenderer.js"></script>
+       <script type="text/javascript">
+           var DOCUMENTATION_OPTIONS = {
+               URL_ROOT:'../../../',
+               VERSION:'master',
+               LANGUAGE:'None',
+               COLLAPSE_INDEX:false,
+               FILE_SUFFIX:'.html',
+               HAS_SOURCE:  true,
+               SOURCELINK_SUFFIX: '.txt'
+           };
+       </script>
+         <script type="text/javascript" src="../../../_static/jquery.js"></script>
+         <script type="text/javascript" src="../../../_static/underscore.js"></script>
+         <script type="text/javascript" src="../../../_static/doctools.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script type="text/javascript" src="../../../_static/katex_autorenderer.js"></script>
      
 
   
